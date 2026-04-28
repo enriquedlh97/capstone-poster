@@ -2,6 +2,46 @@
 
 Final Harvard SEAS capstone poster source and export for the tennis virtual advertising project.
 
+## Quick Start (New Collaborator)
+
+```bash
+git clone git@github.com:enriquedlh97/capstone-poster.git
+cd capstone-poster
+pdflatex -interaction=nonstopmode "poster.tex"
+```
+
+Expected output:
+- A new `poster.pdf` in the repo root.
+- No missing-file errors for `SEAS Research Poster 48 x 60 Template.pdf` or `figures/*`.
+
+## Environment Setup
+
+This project only requires a LaTeX distribution with `pdflatex`.
+
+### macOS
+
+1. Install MacTeX:
+   - [https://www.tug.org/mactex/](https://www.tug.org/mactex/)
+2. Verify:
+
+```bash
+pdflatex --version
+```
+
+### Ubuntu/Debian
+
+```bash
+sudo apt update
+sudo apt install -y texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-pictures
+pdflatex --version
+```
+
+### Optional (Preview Export on macOS)
+
+```bash
+sips -s format png "poster.pdf" --out "poster_preview.png"
+```
+
 ## Files
 
 - `poster.tex`: Main editable source.
@@ -14,6 +54,13 @@ Final Harvard SEAS capstone poster source and export for the tennis virtual adve
 Run from this directory:
 
 ```bash
+pdflatex -interaction=nonstopmode "poster.tex"
+```
+
+For clean rebuild:
+
+```bash
+rm -f poster.aux poster.log poster.out
 pdflatex -interaction=nonstopmode "poster.tex"
 ```
 
@@ -50,3 +97,12 @@ sips -s format png "poster.pdf" --out "poster_preview.png"
 - Do not edit generated files (`.aux`, `.log`, `.out`).
 - Commit figure updates and text updates together so diffs stay meaningful.
 - If a late experiment (v37+) becomes best, update the metrics rows and relevant frame assets, then rebuild.
+
+## Troubleshooting
+
+- `LaTeX Error: File '...sty' not found`
+  - Your TeX distribution is incomplete. Install MacTeX (macOS) or the Ubuntu packages listed above.
+- `! LaTeX Error: File 'SEAS Research Poster 48 x 60 Template.pdf' not found`
+  - Ensure you are running from the repo root and the template PDF is present.
+- Images missing in output PDF
+  - Confirm all referenced files exist in `figures/` with the exact same names.
