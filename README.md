@@ -36,11 +36,15 @@ sudo apt install -y texlive-latex-base texlive-latex-recommended texlive-fonts-r
 pdflatex --version
 ```
 
-### Optional (Preview Export on macOS)
+### Optional Preview Export
+
+Use `pdftoppm` for the most reliable preview of the layered template PDF:
 
 ```bash
-sips -s format png "poster.pdf" --out "poster_preview.png"
+pdftoppm -png -singlefile -r 90 "poster.pdf" "poster_preview_ppm"
 ```
+
+This creates `poster_preview_ppm.png`.
 
 ## Files
 
@@ -67,7 +71,7 @@ pdflatex -interaction=nonstopmode "poster.tex"
 Optional preview export:
 
 ```bash
-sips -s format png "poster.pdf" --out "poster_preview.png"
+pdftoppm -png -singlefile -r 90 "poster.pdf" "poster_preview_ppm"
 ```
 
 ## Update Workflow
@@ -86,6 +90,11 @@ sips -s format png "poster.pdf" --out "poster_preview.png"
 - `figures/result_v36_full_300.png`
 - `figures/original_frame_700.png`
 - `figures/result_v36_full_700.png`
+- `figures/midterm/tennis-frame1.jpg`
+- `figures/midterm/sam-architecture.png`
+- `figures/midterm/homography-original.png`
+- `figures/midterm/homography-bbox.png`
+- `figures/midterm/homography-overlay.png`
 - `figures/evo_v7_foot.png`
 - `figures/evo_v12_foot.png`
 - `figures/evo_v33_foot.png`
@@ -95,6 +104,7 @@ sips -s format png "poster.pdf" --out "poster_preview.png"
 
 - Keep `poster.tex` as the single source of truth.
 - Do not edit generated files (`.aux`, `.log`, `.out`).
+- The official template PDF is drawn first; poster content is placed on top with a full-page TikZ canvas. This keeps the Harvard logos/frame intact while making the content editable.
 - Commit figure updates and text updates together so diffs stay meaningful.
 - If a late experiment (v37+) becomes best, update the metrics rows and relevant frame assets, then rebuild.
 
